@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed 
+  xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">NHS Choices - Services</title>
+  <id>http://v1.syndication.nhschoices.nhs.uk/services/types/srv0267/all</id>
+  <rights type="text">© Crown Copyright 2009</rights>
+  <updated>2018-03-22T14:16:03Z</updated>
+  <category term="Services" />
+  <logo>http://www.nhs.uk/nhscwebservices/documents/logo1.jpg</logo>
+  <author>
+    <name>NHS Choices</name>
+    <uri>http://www.nhs.uk</uri>
+    <email>webservices@nhschoices.nhs.uk</email>
+  </author>
+  <link rel="self" type="application/xml" title="NHS Choices - Services" href="http://v1.syndication.nhschoices.nhs.uk/services/types/srv0267/all?apikey=changeme" />
+  <tracking 
+    xmlns="http://syndication.nhschoices.nhs.uk/services">&lt;img style="border: 0; width: 1px; height: 1px;" alt="" src="http://statse.webtrendslive.com/dcss9yzisf9xjyg74mgbihg8p_8d2u/njs.gif?dcsuri=/services%2ftypes%2fsrv0267%2fall&amp;amp;wt.js=no&amp;amp;wt.cg_n=syndication"/&gt;
+  </tracking>
+  <complete 
+    xmlns="http://purl.org/syndication/history/1.0">
+  </complete>
+  <servicesUsefulLinks 
+    xmlns="http://syndication.nhschoices.nhs.uk/services">
+    <internalLinks></internalLinks>
+    <externalLinks></externalLinks>
+  </servicesUsefulLinks>
+  <entry>
+    <id>http://v1.syndication.nhschoices.nhs.uk/services/types/srv0267/cl223315</id>
+    <title type="text">Pharmacy Service (NHS): Chlamydia screening and treatment - Abbotswood Pharmacy</title>
+    <updated>2018-03-22T14:16:03Z</updated>
+    <link rel="self" title="Abbotswood Pharmacy" href="http://v1.syndication.nhschoices.nhs.uk/services/types/srv0267/cl223315?apikey=changeme" />
+    <link rel="alternate" type="application/xhtml+xml" title="Pharmacy Service (NHS): Chlamydia screening and treatment - Abbotswood Pharmacy" href="http://www.nhs.uk/Services/pharmacies/PctServices/DefaultView.aspx?id=34033" />
+    <content type="application/xml">
+      <s:servicesummary 
+        xmlns:s="http://syndication.nhschoices.nhs.uk/services">
+        <s:type code="SRV0267">Pharmacy Service (NHS): Chlamydia screening and treatment</s:type>
+        <s:serviceDeliverer>
+          <s:name>Abbotswood Pharmacy</s:name>
+        </s:serviceDeliverer>
+      </s:servicesummary>
+    </content>
+  </entry>
+  <entry>
+    <id>http://v1.syndication.nhschoices.nhs.uk/services/types/srv0267/cl254299</id>
+    <title type="text">Pharmacy Service (NHS): Chlamydia screening and treatment - Abc Drug Stores Limited</title>
+    <updated>2018-03-22T14:16:03Z</updated>
+    <link rel="self" title="Abc Drug Stores Limited" href="http://v1.syndication.nhschoices.nhs.uk/services/types/srv0267/cl254299?apikey=changeme" />
+    <link rel="alternate" type="application/xhtml+xml" title="Pharmacy Service (NHS): Chlamydia screening and treatment - Abc Drug Stores Limited" href="http://www.nhs.uk/Services/pharmacies/PctServices/DefaultView.aspx?id=4702" />
+    <content type="application/xml">
+      <s:servicesummary 
+        xmlns:s="http://syndication.nhschoices.nhs.uk/services">
+        <s:type code="SRV0267">Pharmacy Service (NHS): Chlamydia screening and treatment</s:type>
+        <s:serviceDeliverer>
+          <s:name>Abc Drug Stores Limited</s:name>
+        </s:serviceDeliverer>
+      </s:servicesummary>
+    </content>
+  </entry>
+  <entry>
+    <id>http://v1.syndication.nhschoices.nhs.uk/services/types/srv0267/cl199416</id>
+    <title type="text">Pharmacy Service (NHS): Chlamydia screening and treatment - Ace Pharmacy</title>
+    <updated>2018-03-22T14:16:03Z</updated>
+    <link rel="self" title="Ace Pharmacy" href="http://v1.syndication.nhschoices.nhs.uk/services/types/srv0267/cl199416?apikey=changeme" />
+    <link rel="alternate" type="application/xhtml+xml" title="Pharmacy Service (NHS): Chlamydia screening and treatment - Ace Pharmacy" href="http://www.nhs.uk/Services/pharmacies/PctServices/DefaultView.aspx?id=4015" />
+    <content type="application/xml">
+      <s:servicesummary 
+        xmlns:s="http://syndication.nhschoices.nhs.uk/services">
+        <s:type code="SRV0267">Pharmacy Service (NHS): Chlamydia screening and treatment</s:type>
+        <s:serviceDeliverer>
+          <s:name>Ace Pharmacy</s:name>
+        </s:serviceDeliverer>
+      </s:servicesummary>
+    </content>
+  </entry>
+  <entry>
+    <id>http://v1.syndication.nhschoices.nhs.uk/services/types/srv0267/cl384629</id>
+    <title type="text">Pharmacy Service (NHS): Chlamydia screening and treatment - Acheason Dispensing Chemist</title>
+    <updated>2018-03-22T14:16:03Z</updated>
+    <link rel="self" title="Acheason Dispensing Chemist" href="http://v1.syndication.nhschoices.nhs.uk/services/types/srv0267/cl384629?apikey=changeme" />
+    <link rel="alternate" type="application/xhtml+xml" title="Pharmacy Service (NHS): Chlamydia screening and treatment - Acheason Dispensing Chemist" href="http://www.nhs.uk/Services/pharmacies/PctServices/DefaultView.aspx?id=5609" />
+    <content type="application/xml">
+      <s:servicesummary 
+        xmlns:s="http://syndication.nhschoices.nhs.uk/services">
+        <s:type code="SRV0267">Pharmacy Service (NHS): Chlamydia screening and treatment</s:type>
+        <s:serviceDeliverer>
+          <s:name>Acheason Dispensing Chemist</s:name>
+        </s:serviceDeliverer>
+      </s:servicesummary>
+    </content>
+  </entry>
+</feed>
