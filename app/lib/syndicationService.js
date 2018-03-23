@@ -15,17 +15,17 @@ function rejectHtml(json) {
   return json;
 }
 
-function getPage(id) {
+function getService(id) {
   const url = `${config.syndicationApiUrl}/${id}.xhtml?apikey=${API_KEY}`;
   return request.get(url);
 }
 
-function getAllPage() {
+function getAll() {
   const url = `${config.syndicationApiUrl}/all.xml?apikey=${API_KEY}`;
   return request.get(url).then(xmlParser).then(rejectHtml);
 }
 
 module.exports = {
-  getAllPage,
-  getPage,
+  getAll,
+  getService,
 };

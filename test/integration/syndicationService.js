@@ -23,7 +23,7 @@ describe('Syndication Service', () => {
   it('should throw error if syndication returns html', async () => {
     stubAllResults('test/resources/error.html');
     try {
-      await service.getAllPage();
+      await service.getAll();
       chai.assert.fail('should have thrown exception');
     } catch (ex) {
       expect(ex).to.exist;
