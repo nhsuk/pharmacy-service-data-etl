@@ -10,7 +10,7 @@ const log = require('./logger');
 requireEnv(['ETL_NAME']);
 requireEnv(['OUTPUT_FILE']);
 
-const RECORD_KEY = 'odsCode';
+const RECORD_KEY = 'id';
 const WORKERS = 1;
 let resolvePromise;
 let dataService;

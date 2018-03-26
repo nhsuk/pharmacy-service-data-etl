@@ -7,8 +7,9 @@ function getOdsCode(page) {
   return match && match[1];
 }
 
-function mapService(rawService) {
+function mapService(id, rawService) {
   return {
+    id,
     odsCode: getOdsCode(rawService),
     serviceType: config.service,
   };

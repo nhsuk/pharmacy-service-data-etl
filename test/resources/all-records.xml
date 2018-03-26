@@ -72,20 +72,4 @@
       </s:servicesummary>
     </content>
   </entry>
-  <entry>
-    <id>http://v1.syndication.nhschoices.nhs.uk/services/types/srv0267/cl384629</id>
-    <title type="text">Pharmacy Service (NHS): Chlamydia screening and treatment - Acheason Dispensing Chemist</title>
-    <updated>2018-03-22T14:16:03Z</updated>
-    <link rel="self" title="Acheason Dispensing Chemist" href="http://v1.syndication.nhschoices.nhs.uk/services/types/srv0267/cl384629?apikey=changeme" />
-    <link rel="alternate" type="application/xhtml+xml" title="Pharmacy Service (NHS): Chlamydia screening and treatment - Acheason Dispensing Chemist" href="http://www.nhs.uk/Services/pharmacies/PctServices/DefaultView.aspx?id=5609" />
-    <content type="application/xml">
-      <s:servicesummary 
-        xmlns:s="http://syndication.nhschoices.nhs.uk/services">
-        <s:type code="SRV0267">Pharmacy Service (NHS): Chlamydia screening and treatment</s:type>
-        <s:serviceDeliverer>
-          <s:name>Acheason Dispensing Chemist</s:name>
-        </s:serviceDeliverer>
-      </s:servicesummary>
-    </content>
-  </entry>
 </feed>

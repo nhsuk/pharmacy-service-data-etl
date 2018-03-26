@@ -12,7 +12,9 @@ const rawService = readFile('test/resources/rawService.xhtml');
 
 describe('mapService', () => {
   it('should map raw service JSON to preferred structure', () => {
-    const service = mapService(rawService);
+    const id = 'cl223315';
+    const service = mapService(id, rawService);
+    expect(service.id).to.equal(id);
     expect(service.serviceType).to.equal('SRV0267');
     expect(service.odsCode).to.equal('FEE95');
   });
