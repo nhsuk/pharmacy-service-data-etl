@@ -68,8 +68,8 @@ This ensures that during development the output files will all include a `dev-` 
 
 ## Structure of JSON Data
 
-The output JSON will be an array of objects in the format shown in the [Sample SHIS Data](sample-csat-nhs.data.json) file.
-Most of the fields are self-explanatory, the three that require further explanation are `id`, `location`, and `venueType`.
+The output JSON will be an array of objects in the format shown in the [Sample CSAT NHS Data](sample-csat-nhs.data.json) file.
+The `id` field is the Syndication ID of the record, and the `serviceType` is the Service type in Syndication, i.e. `SRV0267`.
 
 ## Test environments
 
@@ -113,10 +113,10 @@ environment.
 The `docker-compose.yml` used for development and deployment via Rancher have a similar structure.
 A stack is run with two `pharmacy-service-data-etl` images with different configurations.
 
-The convention for environment variables used in the Rancher configuration is to add a `NHS_` or `NON_NHS_` prefix to the
+The convention for environment variables used in the Rancher configuration is to add the Service ID as a prefix to the
 `ETL_SCHEDULE`, `OUTPUT_FILE`, and `SYNDICATION_SERVICE` environment variables.
 These are then mapped to the appropriate suffix-less variable in the container, i.e. for the
-'Sexual Health Information and Support Services' container `NHS_ETL_SCHEDULE` is mapped to `ETL_SCHEDULE`, and so on.
+'NHS Chlamydia screening and treatment'  container `SRV0267_ETL_SCHEDULE` is mapped to `ETL_SCHEDULE`, and so on.
 
 ## FAQ
 

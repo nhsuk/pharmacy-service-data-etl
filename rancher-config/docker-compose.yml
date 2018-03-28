@@ -1,0 +1,57 @@
+version: '2'
+services:
+  nhs-etl:
+    image: nhsuk/pharmacy-service-data-etl:${DOCKER_IMAGE_TAG}
+    environment:
+      AZURE_STORAGE_CONNECTION_STRING: '${AZURE_STORAGE_CONNECTION_STRING}'
+      CONTAINER_NAME: ${CONTAINER_NAME}
+      DISABLE_SCHEDULER: ${DISABLE_SCHEDULER}
+      ETL_NAME: csat-nhs-data-etl
+      ETL_SCHEDULE: ${SRV0267_ETL_SCHEDULE}
+      INITIAL_LAST_RUN_DATE: '${SRV0267_INITIAL_LAST_RUN_DATE}'
+      NODE_ENV: production
+      OUTPUT_FILE: csat-nhs-data
+      SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
+      SYNDICATION_SERVICE_END_POINT: ${SRV0267_SYNDICATION_SERVICE_END_POINT}
+      SYNDICATION_URL: http://v1.syndication.nhschoices.nhs.uk
+      SYNDICATION_SERVICE: SRV0267
+    labels:
+      io.rancher.container.pull_image: always
+    logging:
+      driver: splunk
+      options:
+        splunk-url: ${SPLUNK_HEC_URL}
+        splunk-token: ${SPLUNK_HEC_TOKEN}
+        splunk-insecureskipverify: "true"
+        splunk-sourcetype: docker
+        splunk-source: csat-nhs-data-etl
+        splunk-verify-connection: "false"
+        tag: "{{`{{.ImageName}} {{.Name}} {{.FullID}}`}}"
+        splunk-format: json
+
+  non-nhs-etl:
+    image: nhsuk/pharmacy-service-data-etl:${DOCKER_IMAGE_TAG}
+    environment:
+      AZURE_STORAGE_CONNECTION_STRING: '${AZURE_STORAGE_CONNECTION_STRING}'
+      CONTAINER_NAME: ${CONTAINER_NAME}
+      DISABLE_SCHEDULER: ${DISABLE_SCHEDULER}
+      ETL_NAME: csat-non-nhs-data-etl
+      ETL_SCHEDULE: ${SRV0531_ETL_SCHEDULE}
+      INITIAL_LAST_RUN_DATE: '${SRV0531_INITIAL_LAST_RUN_DATE}'
+      NODE_ENV: production
+      OUTPUT_FILE: ${SRV0531_OUTPUT_FILE}
+      SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
+      SYNDICATION_SERVICE:  SRV0531
+    labels:
+      io.rancher.container.pull_image: always
+    logging:
+      driver: splunk
+      options:
+        splunk-url: ${SPLUNK_HEC_URL}
+        splunk-token: ${SPLUNK_HEC_TOKEN}
+        splunk-insecureskipverify: "true"
+        splunk-sourcetype: docker
+        splunk-source: csat-non-nhs-data-etl
+        splunk-verify-connection: "false"
+        tag: "{{`{{.ImageName}} {{.Name}} {{.FullID}}`}}"
+        splunk-format: json
