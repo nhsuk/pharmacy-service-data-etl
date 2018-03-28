@@ -1,6 +1,6 @@
 const version = require('../../package').version;
 
-const service = process.env.SYNDICATION_SERVICE || 'SRV0267';
+const service = process.env.SYNDICATION_SERVICE;
 const syndicationUrl = process.env.SYNDICATION_URL || 'http://v1.syndication.nhschoices.nhs.uk';
 const config = {
   containerName: process.env.CONTAINER_NAME || 'etl-output',

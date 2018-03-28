@@ -1,8 +1,8 @@
 {
-  "name": "pharmacy-service-etl",
+  "name": "pharmacy-service-data-etl",
   "version": "0.1.0",
   "main": "app.js",
-  "repository": "https://github.com/nhsuk/pharmacy-service-etl.git",
+  "repository": "https://github.com/nhsuk/pharmacy-service-data-etl.git",
   "author": "mark <markharrop@yahoo.com>",
   "license": "MIT",
   "private": false,

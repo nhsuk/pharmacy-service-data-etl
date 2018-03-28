@@ -1,12 +1,12 @@
-# Pharmacy Services ETL
+# Pharmacy Service Data ETL
 > ETL to retrieve service information for a pharmacy
-[![GitHub Release](https://img.shields.io/github/release/nhsuk/pharmacy-service-etl.svg)](https://github.com/nhsuk/pharmacy-service-etl/releases/latest/)
-[![Greenkeeper badge](https://badges.greenkeeper.io/nhsuk/pharmacy-service-etl.svg)](https://greenkeeper.io/)
-[![Build Status](https://travis-ci.org/nhsuk/pharmacy-service-etl.svg?branch=master)](https://travis-ci.org/nhsuk/pharmacy-service-etl)
-[![Coverage Status](https://coveralls.io/repos/github/nhsuk/pharmacy-service-etl/badge.svg?branch=master)](https://coveralls.io/github/nhsuk/pharmacy-service-etl?branch=master)
+[![GitHub Release](https://img.shields.io/github/release/nhsuk/pharmacy-service-data-etl.svg)](https://github.com/nhsuk/pharmacy-service-data-etl/releases/latest/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/nhsuk/pharmacy-service-data-etl.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/nhsuk/pharmacy-service-data-etl.svg?branch=master)](https://travis-ci.org/nhsuk/pharmacy-service-data-etl)
+[![Coverage Status](https://coveralls.io/repos/github/nhsuk/pharmacy-service-data-etl/badge.svg?branch=master)](https://coveralls.io/github/nhsuk/pharmacy-service-data-etl?branch=master)
 ## Installation
 
-Clone the repo: `git clone https://github.com/nhsuk/pharmacy-service-etl.git`
+Clone the repo: `git clone https://github.com/nhsuk/pharmacy-service-data-etl.git`
 and review the [`scripts`](scripts) to get up and running.
 
 ## Testing
@@ -27,11 +27,10 @@ The application needs the API key available within the environment as the variab
 The output is uploaded to Azure Blob Storage, a suitable connection string should be set in the `AZURE_STORAGE_CONNECTION_STRING` variable.
 For further details see [Azure Blob Storage](https://azure.microsoft.com/en-gb/services/storage/blobs/).
 
-The ETL calls the `all` end point and refreshes data on a daily basis.
-
+The ETL calls the `all` end point and refreshes all data when run.
 
 Once the initial scan is complete, failed records will be revisited. IDs for records still failing after the second attempt
-are listed in a `csat-nhs-summary.json`[<sup>*</sup>](#development-notes) file.
+are listed in a `csat-nhs-data-summary.json`[<sup>*</sup>](#development-notes) file.
 
 Running `scripts/start` will bring up a docker container and initiate the scrape at a scheduled time, GMT. The default is
 11pm. The time of the scrape can be overridden by setting the environment variable `ETL_SCHEDULE`.
@@ -44,22 +43,22 @@ During local development it is useful to run the scrape at any time. This is pos
 Further details on node-schedule available
 [here](https://www.npmjs.com/package/node-schedule)
 
-A successful scrape will result in the file `csat-nhs.json`[<sup>*</sup>](#development-notes) being written to the `output` folder and to the Azure Blob Storage
+A successful scrape will result in the file `csat-nhs-data.json`[<sup>*</sup>](#development-notes) being written to the `output` folder and to the Azure Blob Storage
 location specified in the environmental variables.
 
 The files uploaded to Azure Blob Storage are:
 
-`csat-nhs-summary-YYYYMMDD-VERSION.json`[<sup>*</sup>](#development-notes)
+`csat-nhs-data-summary-YYYYMMDD-VERSION.json`[<sup>*</sup>](#development-notes)
 
-`csat-nhs-YYYYMMDD-VERSION.json`[<sup>*</sup>](#development-notes)
+`csat-nhs-data-YYYYMMDD-VERSION.json`[<sup>*</sup>](#development-notes)
 
-`csat-nhs.json`[<sup>*</sup>](#development-notes)
+`csat-nhs-data.json`[<sup>*</sup>](#development-notes)
 
 where `YYYYMMDD` is the current year, month and date, and `VERSION` is the current major version of the ETL as defined in the `package.json`.
 
 ### Development Notes
 The ETL may be configured to collect data from any pharmacy service end point in Syndication, i.e.  i.e. SRV0267, SRV0531.
-The details above describe the operation when configured to retrieve 'SRV0267', i.e. 'NHS Chlamydia screening and treatment' data.
+The details above describe the operation when configured to retrieve `SRV0267` (NHS Chlamydia screening and treatment) data.
 
 The provided [docker-compose.yml](docker-compose.yml) runs two containers, one for each possible ETL as described
 [below](#docker-compose-structure-for-deployment-and-development). The output files have been set to `dev-csat-nhs-data`
@@ -99,24 +98,25 @@ environment.
 | :--------------------------------- | :---------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | :------- |
 | `AZURE_STORAGE_CONNECTION_STRING`  | Azure storage connection string                                                                             |                                                   | yes      |
 | `CONTAINER_NAME`                   | Azure storage container name                                                                                | etl-output                                        |          |
-| `DISABLE_SCHEDULER`                | set to 'true' to disable the scheduler                                                                      | false                 |          |
-| `ETL_SCHEDULE`                     | Time of day to run the upgrade. [Syntax](https://www.npmjs.com/package/node-schedule#cron-style-scheduling) | 0 23 * * * (11:00 pm) |          |
+| `DISABLE_SCHEDULER`                | set to 'true' to disable the scheduler                                                                      | false                                             |          |
+| `ETL_NAME`                         | ETL name for logging purposes                                                                               |                                                   | yes      |
+| `ETL_SCHEDULE`                     | Time of day to run the upgrade. [Syntax](https://www.npmjs.com/package/node-schedule#cron-style-scheduling) | 0 23 * * * (11:00 pm)                             |          |
 | `LOG_LEVEL`                        | [log level](https://github.com/trentm/node-bunyan#levels)                                                   | Depends on `NODE_ENV`                             |          |
 | `NODE_ENV`                         | node environment                                                                                            | development                                       |          |
+| `OUTPUT_FILE`                      | Filename saved to azure                                                                                     |                                                   | yes      |
 | `SYNDICATION_API_KEY`              | API key to access syndication                                                                               |                                                   | yes      |
-| `SYNDICATION_URL              `    | URL to Syndication API                                                                                     | http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport | no      |
-| `OUTPUT_FILE`                      | Filename saved to azure                                                                                     | csat-nhs                                         |          |
-| `ETL_NAME`                         | ETL name for logging purposes                                                                               | set to `csat-nhs-etl` in the docker compose file | yes      |
+| `SYNDICATION_URL`                  | URL to Syndication API                                                                                      | http://v1.syndication.nhschoices.nhs.uk           |          |
+| `SYNDICATION_SERVICE`              | Pharmacy service to scrape, i.e. SRV0267                                                                    |                                                   | yes      |
 
 ## Docker Compose Structure for Deployment and Development
 
 The `docker-compose.yml` used for development and deployment via Rancher have a similar structure.
-A stack is run with two `pharmacy-service-etl` images with different configurations.
+A stack is run with two `pharmacy-service-data-etl` images with different configurations.
 
-The convention for environment variables used in the Rancher configuration is to add a `SHIS_` or `CSU25_` prefix to the
-`ETL_SCHEDULE`, `INITIAL_LAST_RUN_DATE`, `OUTPUT_FILE`, and `SYNDICATION_SERVICE_END_POINT` environment variables.
+The convention for environment variables used in the Rancher configuration is to add a `NHS_` or `NON_NHS_` prefix to the
+`ETL_SCHEDULE`, `OUTPUT_FILE`, and `SYNDICATION_SERVICE` environment variables.
 These are then mapped to the appropriate suffix-less variable in the container, i.e. for the
-'Sexual Health Information and Support Services' container `SHIS_ETL_SCHEDULE` is mapped to `ETL_SCHEDULE`, and so on.
+'Sexual Health Information and Support Services' container `NHS_ETL_SCHEDULE` is mapped to `ETL_SCHEDULE`, and so on.
 
 ## FAQ
 
