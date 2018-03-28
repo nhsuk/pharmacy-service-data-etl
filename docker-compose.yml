@@ -1,0 +1,41 @@
+version: '2.1'
+
+services:
+
+  base-etl:
+    build:
+      context: .
+    volumes:
+      - .:/code
+    environment:
+      AZURE_STORAGE_CONNECTION_STRING: '${AZURE_STORAGE_CONNECTION_STRING}'
+      CONTAINER_NAME: ${CONTAINER_NAME}
+      ETL_SCHEDULE: ${ETL_SCHEDULE}
+      SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
+      SYNDICATION_URL: http://v1.syndication.nhschoices.nhs.uk
+
+  csat-nhs-data-etl:
+    extends:
+      service: base-etl
+    environment:
+      ETL_NAME: csat-nhs-data-etl
+      OUTPUT_FILE: dev-csat-nhs-data
+      SYNDICATION_SERVICE: SRV0267
+    volumes:
+      - output-nhs:/code/output
+
+  csat-non-nhs-data-etl:
+    extends:
+      service: base-etl
+    environment:
+      ETL_NAME: csat-non-nhs-data-etl
+      OUTPUT_FILE: dev-csat-non-nhs-data
+      SYNDICATION_SERVICE: SRV0531
+    volumes:
+      - output-none-nhs:/code/output
+
+
+volumes:
+  etl-node_modules:
+  output-nhs:
+  output-none-nhs:
