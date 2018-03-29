@@ -32,10 +32,10 @@ services:
       OUTPUT_FILE: dev-csat-non-nhs-data
       SYNDICATION_SERVICE: SRV0531
     volumes:
-      - output-none-nhs:/code/output
+      - output-non-nhs:/code/output
 
 
 volumes:
   etl-node_modules:
   output-nhs:
-  output-none-nhs:
+  output-non-nhs:
