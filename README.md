@@ -57,7 +57,7 @@ The files uploaded to Azure Blob Storage are:
 where `YYYYMMDD` is the current year, month and date, and `VERSION` is the current major version of the ETL as defined in the `package.json`.
 
 ### Development Notes
-The ETL may be configured to collect data from any pharmacy service end point in Syndication, i.e.  i.e. SRV0267, SRV0531.
+The ETL may be configured to collect data from any pharmacy service end point in Syndication, i.e. SRV0267, SRV0531.
 The details above describe the operation when configured to retrieve `SRV0267` (NHS Chlamydia screening and treatment) data.
 
 The provided [docker-compose.yml](docker-compose.yml) runs two containers, one for each possible ETL as described
@@ -68,7 +68,7 @@ This ensures that during development the output files will all include a `dev-` 
 
 ## Structure of JSON Data
 
-The output JSON will be an array of objects in the format shown in the [Sample CSAT NHS Data](sample-csat-nhs.data.json) file.
+The output JSON will be an array of objects in the format shown in the [Sample Service Data](sample-service-data.json) file.
 The `id` field is the Syndication ID of the record, and the `serviceType` is the Service type in Syndication, i.e. `SRV0267`.
 
 ## Test environments
@@ -87,7 +87,7 @@ env vars in place
 [require-environment-variables](https://www.npmjs.com/package/require-environment-variables)
 is used to check for the env vars that are required for the application to run
 successfully.
-This happens during the application start-up. If an env var is not found the
+This happens during the application start-up. If a required env var is not found the
 application will fail to start and an appropriate message will be displayed.
 
 Environment variables are used to set application level settings for each
