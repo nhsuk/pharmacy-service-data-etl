@@ -1,0 +1,37 @@
+version: '2.1'
+
+services:
+
+  test-etl:
+    extends:
+      file: docker-compose.yml
+      service: base-etl
+    command: yarn test
+    volumes:
+      - shis-etl-test-node_modules:/code/node_modules
+    environment:
+      ETL_NAME: test-etl
+      OUTPUT_FILE: dev-test-data
+      NODE_ENV: development
+      SYNDICATION_SERVICE: SRV0267
+
+  test-ci:
+    extends:
+      file: docker-compose.yml
+      service: base-etl
+    command: yarn run test-ci
+    volumes:
+      - shis-etl-test-node_modules:/code/node_modules
+    environment:
+      COVERALLS_REPO_TOKEN: ${COVERALLS_REPO_TOKEN}
+      ETL_NAME: test-etl
+      OUTPUT_FILE: dev-test-data
+      NODE_ENV: development
+      SYNDICATION_SERVICE: SRV0267
+      TRAVIS: ${TRAVIS}
+      TRAVIS_BRANCH: ${TRAVIS_BRANCH}
+      TRAVIS_COMMIT: ${TRAVIS_COMMIT}
+      TRAVIS_JOB_ID: ${TRAVIS_JOB_ID}
+
+volumes:
+  shis-etl-test-node_modules:
