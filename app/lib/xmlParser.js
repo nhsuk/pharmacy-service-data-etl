@@ -1,22 +1,17 @@
+const promisify = require('util').promisify;
 const xml2js = require('xml2js');
-const stripPrefix = require('xml2js').processors.stripPrefix;
 
-const PARSER_OPTIONS = {
+const stripPrefix = xml2js.processors.stripPrefix;
+
+const parser = new xml2js.Parser({
   explicitArray: false,
   tagNameProcessors: [stripPrefix],
-};
+});
 
-function createParser() {
-  return new xml2js.Parser(PARSER_OPTIONS);
-}
+const parse = promisify(parser.parseString);
 
 function xmlParser(xml) {
-  return new Promise((resolve, reject) => {
-    createParser().parseString(xml, (err, result) => {
-      // eslint-disable-next-line no-unused-expressions
-      err === null ? resolve(result) : reject(err);
-    });
-  });
+  return parse(xml);
 }
 
 module.exports = xmlParser;
