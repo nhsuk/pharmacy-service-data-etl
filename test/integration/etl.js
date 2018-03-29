@@ -35,6 +35,15 @@ function stubServiceLookup(filePath, id) {
     .reply(200, stubbedData);
 }
 
+function stubServiceErrorThenLookup(filePath, id) {
+  const stubbedData = readFile(filePath);
+  nock(config.syndicationApiUrl)
+    .get(`/${id}.xhtml?apikey=${process.env.SYNDICATION_API_KEY}`)
+    .reply(500, '500 error')
+    .get(`/${id}.xhtml?apikey=${process.env.SYNDICATION_API_KEY}`)
+    .reply(200, stubbedData);
+}
+
 function stubErrorLookup(id) {
   nock(config.syndicationApiUrl)
     .get(`/${id}.xhtml?apikey=${process.env.SYNDICATION_API_KEY}`)
@@ -94,6 +103,32 @@ describe('ETL', function test() {
     expect(etlStore.getErorredIds()[0]).to.equal('cl254299');
   });
 
+  it('should retry errored records', async () => {
+    const ids = ['cl223315', 'cl254299', 'cl199416'];
+    const data = [];
+    const dataDate = undefined;
+    const dataService = mockDataService(data, dataDate, true);
+
+    stubAllResults();
+    stubServiceLookup('test/resources/service-one.xhtml', ids[0]);
+    stubServiceErrorThenLookup('test/resources/service-two.xhtml', ids[1]);
+    stubServiceLookup('test/resources/service-three.xhtml', ids[2]);
+
+    await etl.start(dataService);
+
+    const records = etlStore.getRecords();
+    expect(records.length).to.equal(3);
+    expect(etlStore.getErorredIds().length).to.equal(0);
+    expect(records[0].id).to.equal(ids[0]);
+    expect(records[0].odsCode).to.equal('FEE95');
+    expect(records[0].serviceType).to.equal(config.service);
+    expect(records[1].id).to.equal(ids[2]);
+    expect(records[1].odsCode).to.equal('FAM93');
+    expect(records[1].serviceType).to.equal(config.service);
+    expect(records[2].id).to.equal(ids[1]);
+    expect(records[2].odsCode).to.equal('FCW59');
+    expect(records[2].serviceType).to.equal(config.service);
+  });
   afterEach(() => {
     nock.cleanAll();
   });
