@@ -8,12 +8,11 @@ services:
       DISABLE_SCHEDULER: ${DISABLE_SCHEDULER}
       ETL_NAME: csat-nhs-data-etl
       ETL_SCHEDULE: ${SRV0267_ETL_SCHEDULE}
-      INITIAL_LAST_RUN_DATE: '${SRV0267_INITIAL_LAST_RUN_DATE}'
       NODE_ENV: production
-      OUTPUT_FILE: csat-nhs-data
+      OUTPUT_FILE: ${SRV0267_OUTPUT_FILE}
       SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
       SYNDICATION_SERVICE_END_POINT: ${SRV0267_SYNDICATION_SERVICE_END_POINT}
-      SYNDICATION_URL: http://v1.syndication.nhschoices.nhs.uk
+      SYNDICATION_URL: ${SYNDICATION_URL}
       SYNDICATION_SERVICE: SRV0267
     labels:
       io.rancher.container.pull_image: always
@@ -37,11 +36,11 @@ services:
       DISABLE_SCHEDULER: ${DISABLE_SCHEDULER}
       ETL_NAME: csat-non-nhs-data-etl
       ETL_SCHEDULE: ${SRV0531_ETL_SCHEDULE}
-      INITIAL_LAST_RUN_DATE: '${SRV0531_INITIAL_LAST_RUN_DATE}'
       NODE_ENV: production
       OUTPUT_FILE: ${SRV0531_OUTPUT_FILE}
       SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
       SYNDICATION_SERVICE:  SRV0531
+      SYNDICATION_URL: ${SYNDICATION_URL}
     labels:
       io.rancher.container.pull_image: always
     logging:
