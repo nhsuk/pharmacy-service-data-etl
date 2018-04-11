@@ -1,4 +1,4 @@
-0.2.0 / TBA
+0.2.0 / 2018-04-12
 ==================
 - Update npm dependencies
 - Misc improvements
