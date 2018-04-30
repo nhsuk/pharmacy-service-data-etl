@@ -1,6 +1,6 @@
 {
   "name": "pharmacy-service-data-etl",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "main": "app.js",
   "repository": "https://github.com/nhsuk/pharmacy-service-data-etl.git",
   "author": "mark <markharrop@yahoo.com>",
@@ -27,8 +27,8 @@
   },
   "dependencies": {
     "async": "^2.6.0",
-    "azure-data-service": "^0.2.1",
-    "etl-toolkit": "0.1.1",
+    "azure-data-service": "0.3.0",
+    "etl-toolkit": "0.2.0",
     "google-libphonenumber": "^3.1.1",
     "moment": "^2.21.0",
     "nhsuk-bunyan-logger": "^1.10.0",
