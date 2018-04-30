@@ -28,7 +28,7 @@
   "dependencies": {
     "async": "^2.6.0",
     "azure-data-service": "^0.2.1",
-    "etl-toolkit": "0.1.1",
+    "etl-toolkit": "0.2.0",
     "google-libphonenumber": "^3.1.1",
     "moment": "^2.21.0",
     "nhsuk-bunyan-logger": "^1.10.0",
