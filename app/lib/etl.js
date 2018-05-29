@@ -1,29 +1,35 @@
 const moment = require('moment');
 const requireEnv = require('require-environment-variables');
 
-const etlStore = require('etl-toolkit').etlStore;
+const EtlStore = require('etl-toolkit').EtlStore;
+const config = require('./config');
 const getAllIDs = require('./getAllIDs');
 const getService = require('./actions/getService');
-const populateRecordsFromIdsQueue = require('etl-toolkit').queues.populateRecordsFromIds;
+const PopulateRecordsQueue = require('etl-toolkit').queues.populateRecordsFromIds;
 const log = require('./logger');
 
 requireEnv(['ETL_NAME']);
 requireEnv(['OUTPUT_FILE']);
 
-const RECORD_KEY = 'id';
 const WORKERS = 1;
 let resolvePromise;
 let dataService;
 let startMoment;
+const etlStore = new EtlStore({ idKey: config.idKey, log, outputFile: config.outputFile });
 
-etlStore.setIdKey(RECORD_KEY);
+const populateRecordsFromIdsQueue = new PopulateRecordsQueue({
+  etlStore,
+  hitsPerHour: config.hitsPerHour,
+  log,
+  populateRecordAction: getService,
+});
 
 function clearState() {
   etlStore.clearState();
 }
 
 function logStatus() {
-  log.info(`${etlStore.getErorredIds().length} errored records`);
+  log.info(`${etlStore.getErroredIds().length} errored records`);
 }
 
 async function etlComplete() {
@@ -40,10 +46,9 @@ async function etlComplete() {
 }
 
 function startRevisitFailuresQueue() {
-  if (etlStore.getErorredIds().length > 0) {
+  if (etlStore.getErroredIds().length > 0) {
     log.info('Revisiting failed IDs');
     const options = {
-      populateRecordAction: getService,
       queueComplete: etlComplete,
       workers: WORKERS,
     };
@@ -55,7 +60,6 @@ function startRevisitFailuresQueue() {
 
 function startPopulateRecordsFromIdsQueue() {
   const options = {
-    populateRecordAction: getService,
     queueComplete: startRevisitFailuresQueue,
     workers: WORKERS,
   };
@@ -86,5 +90,6 @@ function start(dataServiceIn) {
 }
 
 module.exports = {
+  etlStore,
   start,
 };

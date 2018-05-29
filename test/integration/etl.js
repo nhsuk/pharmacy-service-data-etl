@@ -6,7 +6,8 @@ const nock = require('nock');
 const expect = chai.expect;
 
 const etl = require('../../app/lib/etl');
-const etlStore = require('etl-toolkit').etlStore;
+
+const etlStore = etl.etlStore;
 const config = require('../../app/lib/config');
 
 function mockDataService(data, date, expectUpload) {
@@ -129,7 +130,7 @@ describe('ETL', function test() {
     expect(records[0].serviceType).to.equal(config.service);
     expect(records[1].odsCode).to.equal('FAM93');
     expect(records[1].serviceType).to.equal(config.service);
-    expect(etlStore.getErorredIds()[0]).to.equal('cl254299');
+    expect(etlStore.getErroredIds()[0]).to.equal('cl254299');
   });
 
   it('should retry errored records', async () => {
@@ -147,7 +148,7 @@ describe('ETL', function test() {
 
     const records = etlStore.getRecords();
     expect(records.length).to.equal(3);
-    expect(etlStore.getErorredIds().length).to.equal(0);
+    expect(etlStore.getErroredIds().length).to.equal(0);
     expect(records[0].id).to.equal(ids[0]);
     expect(records[0].odsCode).to.equal('FEE95');
     expect(records[0].serviceType).to.equal(config.service);
