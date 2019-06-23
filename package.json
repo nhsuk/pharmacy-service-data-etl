@@ -26,7 +26,7 @@
     "test-watch-unit": "yarn test-unit --watch --reporter min"
   },
   "dependencies": {
-    "async": "^2.6.0",
+    "async": "^3.1.0",
     "azure-data-service": "0.3.0",
     "etl-toolkit": "0.2.0",
     "google-libphonenumber": "^3.1.1",
