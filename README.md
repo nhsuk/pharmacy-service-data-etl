@@ -1,3 +1,7 @@
+# **DEPRECATED** - no longer actively maintained
+
+---
+
 # Pharmacy Service Data ETL
 > ETL to retrieve service information for a pharmacy
 
